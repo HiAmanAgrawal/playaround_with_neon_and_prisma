@@ -9,18 +9,21 @@ datasource db {
 
 model User {
   id        String   @id @default(cuid())
-  email     String   @unique
   name      String?
+  email     String   @unique
+  image     String?
   notes     Note[]
   createdAt DateTime @default(now())
 }
+
 
 model Note {
   id        String   @id @default(cuid())
   title     String
   content   String
-  user      User     @relation(fields: [userId], references: [id])
+  embedding Json?
   userId    String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
+
